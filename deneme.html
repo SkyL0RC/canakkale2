@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gün Sliderı</title>
+    <style>
+       
+        .slider-container {
+            width: 300px;
+            position: relative;
+            text-align: center;
+        }
+
+        .day-label {
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .slides {
+            display: flex;
+            overflow: hidden;
+            width: 300px;
+            height: 200px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .slides img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .prev {
+            left: 0;
+        }
+
+        .next {
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="slider-container">
+        <!-- Gün ismi üst tarafta -->
+        <div class="day-label" id="dayLabel">Pazartesi</div>
+        
+        <!-- Slider Kısmı -->
+        <div class="slides" id="slides">
+            <img src="/resimler/dersler/pzt.png" alt="Pazartesi">
+            <img src="/resimler/dersler/salı.png" alt="Salı">
+            <img src="/resimler/dersler/crsb.png" alt="Çarşamba">
+            <img src="/resimler/dersler/prsb.png" alt="Perşembe">
+            <img src="/resimler/dersler/cuma.png" alt="Cuma">
+        </div>
+
+        <!-- İleri ve geri tuşları -->
+        <button class="prev" onclick="prevSlide()">&#10094;</button>
+        <button class="next" onclick="nextSlide()">&#10095;</button>
+    </div>
+
+    <script>
+        var currentSlide = 0;
+        var slides = document.getElementById("slides").children;
+        var dayLabel = document.getElementById("dayLabel");
+        var dayNames = ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma"];
+
+        function showSlide(index) {
+            if (index >= slides.length) currentSlide = 0;
+            if (index < 0) currentSlide = slides.length - 1;
+
+            for (var i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[currentSlide].style.display = "block";
+            dayLabel.textContent = dayNames[currentSlide];
+        }
+
+        function nextSlide() {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide--;
+            showSlide(currentSlide);
+        }
+
+        // Sayfa yüklendiğinde ilk slaytı göster
+        window.onload = function() {
+            showSlide(currentSlide);
+        };
+    </script>
+</body>
+</html>
