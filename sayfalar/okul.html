@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <title>Çanakkale</title>
 
     <!-- İkon Dosyasını Tanımlama -->
@@ -22,14 +22,12 @@
     
   </head>
   <body>
-    <img src="resimler/skule.png" alt="Çanakkale" class="background-img" />
+    <img src="../resimler/skule.png" alt="Çanakkale" class="background-img" />
 
     <div class="content">
       <div class="background-box">
         
-        <a
-          href="ders-programı.html"
-        >
+        <a href="/sayfalar/ders-programi.html">
           <div class="link-container">DERS PROGRAMI</div>
         </a>
 
@@ -66,18 +64,23 @@
     </div>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // Tüm link-container sınıfına sahip öğeleri seç
         const linkContainers = document.querySelectorAll(".link-container");
 
         linkContainers.forEach((container) => {
-          // Her bir öğeye tıklama olayı ekle
-          container.addEventListener("click", function () {
+          container.addEventListener("click", function (event) {
+            // Bağlantıyı hedefleyen a etiketini bul
+            const link = this.parentNode;
+
+            // Yönlendirmeyi durdur
+            event.preventDefault();
+
             // Animasyon sınıfını ekle
             this.classList.add("animate");
 
-            // 0.3 saniye sonra animasyon sınıfını kaldır
+            // 0.3 saniye sonra yönlendirme yap
             setTimeout(() => {
               this.classList.remove("animate");
+              window.location.href = link.href; // Bağlantıya yönlendir
             }, 300); // 300 ms, animasyon süresi ile aynı olmalı
           });
         });
