@@ -15,8 +15,7 @@
       .background-img {
         position: absolute;
         width: 100%;
-        height: auto;
-        display: block;
+        height: 100%;
         object-fit: cover; /* Resmin ekranı kaplamasını sağlar */
         filter: blur(px); /* Resmi bulanıklaştırır */
         z-index: -1; /* Resmi arka plana taşır */
