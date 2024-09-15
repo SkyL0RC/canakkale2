@@ -1,4 +1,3 @@
-
       html,
       body {
         margin: 0;
@@ -8,17 +7,19 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        position: relative; /* İçeriklerin üzerine logo yerleştirmek için */
         overflow-x: hidden;
       }
 
       .background-img {
         position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
         height: 100%;
         object-fit: cover; /* Resmin ekranı kaplamasını sağlar */
-        filter: blur(px); /* Resmi bulanıklaştırır */
         z-index: -1; /* Resmi arka plana taşır */
+        background-color: #000; /* Yüklenmeden önce siyah arka plan */
+
       }
 
       .content {
