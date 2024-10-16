@@ -113,6 +113,83 @@
             font-size: 40px;
 
         }
+        
+
+      /* PC için düzenlemeler */
+@media only screen and (min-width: 601px) {
+  th, td {
+    font-size: 20px; /* PC için büyük yazı boyutu */
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 50px; /* PC için büyük başlık boyutu */
+  }
+
+  .slider-container {
+    width: 60%; /* PC'de slider genişliği %60 */
+    margin-top: 100px; /* PC'de daha büyük boşluk */
+    margin-left: auto;
+    margin-right: auto; /* Ortalamak için */
+  }
+
+  .slides {
+    height: 600px; /* PC'de büyük slider */
+    
+  }
+
+  .prev, .next {
+    padding: 20px; /* PC'de büyük oklar */
+    margin-top: 50px;
+    font-size: 40px;
+  }
+
+  .table-container {
+    width: 60%; /* PC'de tablo genişliği %60 */
+    margin-left: auto;
+    margin-right: auto; /* Ortalamak için */
+  }
+}
+
+      /* tablet için düzenlemeler */
+      @media only screen and (max-width: 601px) {
+  th, td {
+    font-size: 15px; /* PC için büyük yazı boyutu */
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 50px; /* PC için büyük başlık boyutu */
+  }
+
+  .slider-container {
+    width: 80%; /* PC'de slider genişliği %60 */
+    margin-top: 100px; /* PC'de daha büyük boşluk */
+    margin-left: auto;
+    margin-right: auto; /* Ortalamak için */
+  }
+
+  .slides {
+    height: 400px; /* PC'de büyük slider */
+  }
+
+  .prev, .next {
+    padding: 20px; /* PC'de büyük oklar */
+    margin-top: 50px;
+    font-size: 40px;
+  }
+
+  .table-container {
+    width: 80%; /* PC'de tablo genişliği %60 */
+    margin-left: auto;
+    margin-right: auto; /* Ortalamak için */
+  }
+}
+
+
+
+
+
 
     </style>
   </head>
@@ -158,7 +235,7 @@
         <tr class="wednesday">
           <td>Ayrık M.</td>
           <td>A203</td>
-          <td>15.40-17.15</td>
+          <td>14.40-16.15</td>
         </tr>
 
         <tr>
