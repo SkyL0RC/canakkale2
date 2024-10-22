@@ -84,7 +84,7 @@
             height: 800px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            margin-bottom: 700px;
+            margin-bottom: 100px;
         }
 
         .slides img {
@@ -114,7 +114,18 @@
 
         }
 
-        
+        /* pdf kısmı*/
+
+        .pdf {
+            width: 90%;
+            position: relative;
+            display: block; /* Blok olarak davranmasını sağlar */
+            margin: 50px auto; /* Yatayda ve dikeyde ortalamak için */
+            margin-top: 00px;
+            border-radius: 10px;
+            height: 670px;
+        }       
+
         
 
 
@@ -209,7 +220,11 @@
     <button class="prev" onclick="prevSlide()">&#10094;</button>
     <button class="next" onclick="nextSlide()">&#10095;</button>
   </div>
+
+  
   </div>
+  <iframe class="pdf" src="https://cdn.comu.edu.tr/cms/muhendislik.ce/files/603-2024-2025-ders-programi-lisans.pdf"></iframe>
+
 
   <script>
       var currentSlide = 0;
