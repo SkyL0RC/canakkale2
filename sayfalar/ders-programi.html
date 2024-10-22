@@ -124,7 +124,27 @@
             margin-top: 00px;
             border-radius: 10px;
             height: 670px;
-        }       
+        }    
+        
+        .tum-ders-link {
+    display: block; /* Ortalamak için blok yap */
+    width: fit-content; /* Bağlantı genişliğini içerik kadar yap */
+    margin: 0 auto; /* Yatayda ortalamak için */
+    font-size: 24px; /* Yazı boyutunu büyüt */
+    color: black; /* Yazı rengini siyah yap */
+    text-decoration: none; /* Alt çizgiyi kaldır */
+    padding: 10px 20px; /* Bağlantı çevresine boşluk ekle */
+    border: 2px solid black; /* Siyah bir çerçeve ekle */
+    border-radius: 8px; /* Kenarları yuvarla */
+    background-color: #f0f0f0; /* Hafif gri bir arka plan ekle */
+    transition: background-color 0.3s ease; /* Arka plan rengini değiştirmek için geçiş efekti ekle */
+}
+
+.tum-ders-link:hover {
+    background-color: #ddd; /* Üzerine gelince arka plan rengini değiştir */
+}
+
+        
 
         
 
@@ -224,6 +244,7 @@
   
   </div>
   <iframe class="pdf" src="https://cdn.comu.edu.tr/cms/muhendislik.ce/files/603-2024-2025-ders-programi-lisans.pdf"></iframe>
+  <a class="tum-ders-link" href="https://cdn.comu.edu.tr/cms/muhendislik.ce/files/603-2024-2025-ders-programi-lisans.pdf" >PDF dosyasını görüntülemek için tıklayın</a>
 
 
   <script>
