@@ -1,350 +1,266 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Ders Programı</title>
-    <style>
-      body {
-        background-color: rgba(122, 89, 89, 0.633);
-        font-family: monospace;
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ders Programı</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: rgba(122, 89, 89, 0.633);
+      font-family: monospace;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 768px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 2.5em;
+      margin-bottom: 30px;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      margin: 0 auto 50px auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0 auto;
+    }
+
+    th, td {
+      border: 7px solid black;
+      padding: 20px;
+      text-align: center;
+      font-size: 1.5em;
+    }
+
+    th {
+      background-color: #8d9cf4;
+      color: black;
+    }
+
+    .monday td,
+    .tuesday td,
+    .wednesday td,
+    .thursday td,
+    .friday td {
+      background-color: #d3d3d3;
+    }
+
+    .slider-container {
+      width: 100%;
+      max-width: 900px;
+      margin: 50px auto;
+      text-align: center;
+    }
+
+    .day-label {
+      margin-bottom: 10px;
+      font-size: 2em;
+      font-weight: bold;
+    }
+
+    .slides {
+      display: flex;
+      overflow: hidden;
+      width: 100%;
+      height: 400px;
+      max-height: 500px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(164, 153, 153, 0.2);
+      position: relative;
+      align-items: center;
+      justify-content: center;
+      background-color: #c6b6b6;
+    }
+
+    .slides img {
+      width: 100%;
+      height: 100%;
+      display: none;
+    }
+
+    .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.3);
+      color: white;
+      border: none;
+      padding: 20px;
+      cursor: pointer;
+      font-size: 2em;
+      z-index: 1;
+      transition: background-color 0.3s ease;
+    }
+
+    .prev:hover, .next:hover {
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .prev {
+      left: 0;
+    }
+
+    .next {
+      right: 0;
+    }
+
+    .pdf {
+      width: 100%;
+      height: 400px;
+      border-radius: 10px;
+      margin: 50px auto;
+      display: block;
+    }
+
+    .tum-ders-link {
+      display: block;
+      text-align: center;
+      font-size: 1.2em;
+      margin: 30px auto;
+      width: fit-content;
+      padding: 10px 20px;
+      color: black;
+      text-decoration: none;
+      border: 2px solid black;
+      border-radius: 8px;
+      background-color: #f0f0f0;
+      transition: background-color 0.3s ease;
+    }
+
+    .tum-ders-link:hover {
+      background-color: #ddd;
+    }
+
+    @media (max-width: 768px) {
+      th, td {
+        font-size: 1em;
+        padding: 10px;
       }
 
-      table,
-      th,
-      td {
-        border: 7px solid black;
-        border-collapse: collapse;
-        width: 100%; /* Tablo genişliği %100 */
-        height: auto;
-        margin-top: 120px;
+      .day-label {
+        font-size: 1.5em;
       }
 
-      th,
-      td {
-        padding: 20px;
-        text-align: center;
-        font-size: 50px; /* Yazı boyutunu büyüt */
+      .prev, .next {
+        padding: 10px;
+        font-size: 1.5em;
       }
-      th {
-        background-color: #8d9cf4; /* Günlerin arka plan rengi */
-        color: black;
-        font-size: 50px;
-        text-align: center;
-      }
-      .table-container {
-        display: flex;
-        justify-content: center;
-        overflow-x: auto; /* Taşmayı önlemek için */
-        width: 90%; /* Mobilde %90 genişlik kaplar */
-        margin: auto; /* Ortalamak için */
-      }
-      h2 {
-        display: flex;
-        justify-content: center;
-        font-size: 50px; /* Başlığın yazı boyutunu büyüt */
-        margin: 20px; /* Başlık etrafında boşluk bırak */
-      }
-
-      /* Günlere özel arka plan renkleri */
-      .monday td {
-        background-color: #d3d3d3;
-      }
-      .tuesday td {
-        background-color: #d3d3d3;
-      }
-      .wednesday td {
-        background-color: #d3d3d3;
-      }
-      .thursday td {
-        background-color: #d3d3d3;
-      }
-      .friday td {
-        background-color: #d3d3d3;
-      }
-
-      
-/*--- slider kısmı -------------------------*/
-      .slider-container {
-            width: 90%;
-            position: relative;
-            text-align: center;
-            margin: 50px auto; /* Ortalamak için */
-            margin-top: 100px;
-        }
-
-        .day-label {
-            margin-bottom: 10px;
-            font-size: 50px;
-            font-weight: bold;
-        }
-
-        .slides {
-            display: flex;
-            overflow: hidden;
-            width: 100%;
-            height: 800px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            margin-bottom: 100px;
-        }
-
-        .slides img {
-            width: 100%;
-            height: 100%;
-        }
-
-        .prev, .next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.158);
-            color: white;
-            border: none;
-            padding: 40px;
-            cursor: pointer;
-        }
-
-        .prev {
-            left: 0;
-            font-size: 40px;
-        }
-
-        .next {
-            right: 0;
-            font-size: 40px;
-
-        }
-
-        /* pdf kısmı*/
-
-        .pdf {
-            width: 90%;
-            position: relative;
-            display: block; /* Blok olarak davranmasını sağlar */
-            margin: 50px auto; /* Yatayda ve dikeyde ortalamak için */
-            margin-top: 00px;
-            border-radius: 10px;
-            height: 670px;
-        }    
-        
-        .tum-ders-link {
-    display: block; /* Ortalamak için blok yap */
-    width: fit-content; /* Bağlantı genişliğini içerik kadar yap */
-    margin: 0 auto; /* Yatayda ortalamak için */
-    font-size: 24px; /* Yazı boyutunu büyüt */
-    color: black; /* Yazı rengini siyah yap */
-    text-decoration: none; /* Alt çizgiyi kaldır */
-    padding: 10px 20px; /* Bağlantı çevresine boşluk ekle */
-    border: 2px solid black; /* Siyah bir çerçeve ekle */
-    border-radius: 8px; /* Kenarları yuvarla */
-    background-color: #f0f0f0; /* Hafif gri bir arka plan ekle */
-    transition: background-color 0.3s ease; /* Arka plan rengini değiştirmek için geçiş efekti ekle */
-}
-
-.tum-ders-link:hover {
-    background-color: #ddd; /* Üzerine gelince arka plan rengini değiştir */
-}
-
-        
-
-        
-
-
-
-
-
-
-    </style>
-  </head>
-  <body>
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
     <div class="table-container">
       <table>
-        <tr>
-          <th colspan="4">Pazartesi</th>
-        </tr>
-        <tr class="monday">
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr class="monday">
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
+        <tr><th colspan="4">Pazartesi</th></tr>
+        <tr class="monday"><td></td><td></td><td></td></tr>
+        <tr class="monday"><td></td><td></td><td></td></tr>
 
-        <tr>
-          <th colspan="4">Salı</th>
-        </tr>
-        <tr class="tuesday">
-          <td>PLab</td>
-          <td>Lab1</td>
-          <td>09.00-10.35</td>
-        </tr>
-        <tr class="tuesday">
-          <td>PDK</td>
-          <td>A305</td>
-          <td>12.20-14.45</td>
-        </tr>
+        <tr><th colspan="4">Salı</th></tr>
+        <tr class="tuesday"><td>PLab</td><td>Lab1</td><td>09.00-10.35</td></tr>
+        <tr class="tuesday"><td>PDK</td><td>A305</td><td>12.20-14.45</td></tr>
 
-        <tr>
-          <th colspan="4">Çarşamba</th>
-        </tr>
-        <tr class="wednesday">
-          <td>Bil-Org</td>
-          <td>A203</td>
-          <td>09.50-13.05</td>
-        </tr>
-        <tr class="wednesday">
-          <td>Bil-Hes</td>
-          <td>A201</td>
-          <td>15.40-18.05</td>
-        </tr>
+        <tr><th colspan="4">Çarşamba</th></tr>
+        <tr class="wednesday"><td>Bil-Org</td><td>A203</td><td>09.50-13.05</td></tr>
+        <tr class="wednesday"><td>Bil-Hes</td><td>A201</td><td>15.40-18.05</td></tr>
 
-        <tr>
-          <th colspan="4">Perşembe</th>
-        </tr>
-        <tr class="thursday">
-          <td>İSG</td>
-          <td>A305</td>
-          <td>12.20-13.55</td>
-        </tr>
-        <tr class="thursday">
-          <td>Say-Elk</td>
-          <td>Elk.Lab</td>
-          <td>14.00-17.15</td>
-        </tr>
+        <tr><th colspan="4">Perşembe</th></tr>
+        <tr class="thursday"><td>İSG</td><td>A305</td><td>12.20-13.55</td></tr>
+        <tr class="thursday"><td>Say-Elk</td><td>Elk.Lab</td><td>14.00-17.15</td></tr>
 
-        <tr>
-          <th colspan="4">Cuma</th>
-        </tr>
-        <tr class="friday">
-          <td>Olasılık</td>
-          <td>A203</td>
-          <td>09.00-12.15</td>
-        </tr>
+        <tr><th colspan="4">Cuma</th></tr>
+        <tr class="friday"><td>Olasılık</td><td>A203</td><td>09.00-12.15</td></tr>
       </table>
     </div>
 
-
     <div class="slider-container">
-      <!-- Gün ismi üst tarafta -->
       <div class="day-label" id="dayLabel">Pazartesi</div>
-      
-      <!-- Slider Kısmı -->
       <div class="slides" id="slides">
-          <img src="/resimler/dersler/pzt.png" alt="Pazartesi">
-          <img src="/resimler/dersler/salı.png" alt="Salı">
-          <img src="/resimler/dersler/crsb.png" alt="Çarşamba">
-          <img src="/resimler/dersler/prsb.png" alt="Perşembe">
-          <img src="/resimler/dersler/cuma.png" alt="Cuma">
+        <button class="prev" onclick="prevSlide()">&#10094;</button>
+
+        <img src="/resimler/dersler/.png" alt="Pazartesi">
+        <img src="/resimler/dersler/salı.png" alt="Salı">
+        <img src="/resimler/dersler/crsb.png" alt="Çarşamba">
+        <img src="/resimler/dersler/prsb.png" alt="Perşembe">
+        <img src="/resimler/dersler/cuma.png" alt="Cuma">
+
+        <button class="next" onclick="nextSlide()">&#10095;</button>
       </div>
+    </div>
 
-      <!-- İleri ve geri tuşları -->
-      <!-- Button container -->
-  <div class="button-container">
-    <button class="prev" onclick="prevSlide()">&#10094;</button>
-    <button class="next" onclick="nextSlide()">&#10095;</button>
+    <iframe class="pdf" src="https://docs.google.com/gview?url=https://cdn.comu.edu.tr/cms/muhendislik.ce/files/658-2024-2025-bahar-ders-programi-lisans-programi.pdf&embedded=true"></iframe>
+
+    <a class="tum-ders-link" href="/resimler/dersler/tum-dersler.pdf">PDF dosyasını görüntülemek için tıklayın</a>
   </div>
-
-  
-  </div>
-  <iframe class="pdf" src="https://docs.google.com/gview?url=https://cdn.comu.edu.tr/cms/muhendislik.ce/files/658-2024-2025-bahar-ders-programi-lisans-programi.pdf&embedded=true" width="100%" height="600px"></iframe>
-
-  <a class="tum-ders-link" href="/resimler/dersler/tum-dersler.pdf" >PDF dosyasını görüntülemek için tıklayın</a>
-
 
   <script>
-      var currentSlide = 0;
-      var slides = document.getElementById("slides").children;
-      var dayLabel = document.getElementById("dayLabel");
-      var dayNames = ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma"];
+    let currentSlide = 0;
+    const slides = document.getElementById("slides").getElementsByTagName("img");
+    const dayLabel = document.getElementById("dayLabel");
+    const dayNames = ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma"];
 
-      function showSlide(index) {
-          if (index >= slides.length) currentSlide = 0;
-          if (index < 0) currentSlide = slides.length - 1;
-
-          for (var i = 0; i < slides.length; i++) {
-              slides[i].style.display = "none";
-          }
-          slides[currentSlide].style.display = "block";
-          dayLabel.textContent = dayNames[currentSlide];
+    function showSlide(index) {
+      if (index >= slides.length) currentSlide = 0;
+      if (index < 0) currentSlide = slides.length - 1;
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
       }
-
-      function nextSlide() {
-          currentSlide++;
-          showSlide(currentSlide);
-      }
-
-      function prevSlide() {
-          currentSlide--;
-          showSlide(currentSlide);
-      }
-
-      // Sayfa yüklendiğinde ilk slaytı göster
-      window.onload = function() {
-          showSlide(currentSlide);
-      };
-
-      // KAYDIRMA ÖZELLİĞİ
-      var currentSlide = 0;
-  var slides = document.getElementById("slides").children;
-  var dayLabel = document.getElementById("dayLabel");
-  var dayNames = ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma"];
-  
-  var startX;
-  var isDragging = false;
-
-  function showSlide(index) {
-    if (index >= slides.length) currentSlide = 0;
-    if (index < 0) currentSlide = slides.length - 1;
-
-    for (var i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
+      slides[currentSlide].style.display = "block";
+      dayLabel.textContent = dayNames[currentSlide];
     }
-    slides[currentSlide].style.display = "block";
-    dayLabel.textContent = dayNames[currentSlide];
-  }
 
-  function nextSlide() {
-    currentSlide++;
-    showSlide(currentSlide);
-  }
-
-  function prevSlide() {
-    currentSlide--;
-    showSlide(currentSlide);
-  }
-
-  window.onload = function() {
-    showSlide(currentSlide);
-  };
-
-  // Dokunma olayları
-  document.getElementById("slides").addEventListener("touchstart", function(event) {
-    startX = event.touches[0].clientX;
-    isDragging = true;
-  });
-
-  document.getElementById("slides").addEventListener("touchmove", function(event) {
-    if (!isDragging) return;
-    var moveX = event.touches[0].clientX;
-    if (startX - moveX > 50) {
-      nextSlide();
-      isDragging = false;
-    } else if (moveX - startX > 50) {
-      prevSlide();
-      isDragging = false;
+    function nextSlide() {
+      currentSlide++;
+      showSlide(currentSlide);
     }
-  });
 
-  document.getElementById("slides").addEventListener("touchend", function() {
-    isDragging = false;
-  });
+    function prevSlide() {
+      currentSlide--;
+      showSlide(currentSlide);
+    }
+
+    window.onload = () => {
+      showSlide(currentSlide);
+    };
+
+    // Dokunmatik destek
+    let startX, isDragging = false;
+    const slidesElement = document.getElementById("slides");
+
+    slidesElement.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+      isDragging = true;
+    });
+
+    slidesElement.addEventListener("touchmove", (e) => {
+      if (!isDragging) return;
+      const moveX = e.touches[0].clientX;
+      if (startX - moveX > 50) {
+        nextSlide();
+        isDragging = false;
+      } else if (moveX - startX > 50) {
+        prevSlide();
+        isDragging = false;
+      }
+    });
+
+    slidesElement.addEventListener("touchend", () => {
+      isDragging = false;
+    });
   </script>
-
-
-
-    
-    </div>
-  </body>
+</body>
 </html>
