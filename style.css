@@ -40,9 +40,10 @@ body {
 }
 
 .link-container:hover {
-  transform: scale(1.08);
-  background-color: rgba(255, 0, 0, 0.7);
-  transition: transform 0.2s, background-color 0.2s;
+  /* Hiçbir efekt uygulanmasın */
+  transform: scale(0.9);
+  background-color: #2d2d2dd9;
+  transition: none;
 }
 
 @keyframes wiggle {
