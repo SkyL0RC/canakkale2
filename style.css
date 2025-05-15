@@ -55,5 +55,4 @@ body {
     0,
     0.7
   ); /* Tıklama sırasında arka plan rengini değiştirir */
-  transform: scale(0.98); /* Tıklama sırasında biraz küçülür */
 }
