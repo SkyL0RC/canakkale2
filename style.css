@@ -39,34 +39,6 @@ body {
   transform: scale(0.9);
 }
 
-.link-container:hover {
-  /* Hiçbir efekt uygulanmasın */
-  transform: scale(0.9);
-  background-color: #2d2d2dd9;
-  transition: none;
-}
-
-@keyframes wiggle {
-  0% {
-    transform: scale(0.9) rotate(0deg);
-  }
-  20% {
-    transform: scale(1.05) rotate(-3deg);
-  }
-  40% {
-    transform: scale(1.08) rotate(3deg);
-  }
-  60% {
-    transform: scale(1.05) rotate(-2deg);
-  }
-  80% {
-    transform: scale(1.02) rotate(2deg);
-  }
-  100% {
-    transform: scale(0.9) rotate(0deg);
-  }
-}
-
 .background-box {
   font-size: 30px;
 }
