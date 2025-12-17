@@ -18,6 +18,12 @@
             min-height: 100vh;
         }
 
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -26,15 +32,29 @@
         h1 {
             text-align: center;
             color: white;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
             font-size: 2.5em;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5em;
+                margin-bottom: 25px;
+            }
         }
 
         .calendar {
             display: grid;
             gap: 20px;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        @media (max-width: 768px) {
+            .calendar {
+                gap: 15px;
+                grid-template-columns: 1fr;
+            }
         }
 
         .exam-card {
@@ -159,18 +179,11 @@
         }
 
         @media (max-width: 768px) {
-            h1 {
-                font-size: 1.8em;
-            }
-
-            .calendar {
-                grid-template-columns: 1fr;
-            }
-
             .back-button {
-                bottom: 20px;
-                right: 20px;
-                padding: 12px 25px;
+                bottom: 15px;
+                right: 15px;
+                padding: 10px 20px;
+                font-size: 0.9em;
             }
         }
 
@@ -179,9 +192,16 @@
             background: linear-gradient(145deg, #3a3a3a, #2a2a2a);
             padding: 20px;
             border-radius: 15px;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.1);
             border: 1px solid #505050;
+        }
+
+        @media (max-width: 768px) {
+            .countdown {
+                padding: 15px;
+                margin-bottom: 25px;
+            }
         }
 
         .countdown h2 {
@@ -197,91 +217,30 @@
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
-        .swiper-section {
-            margin-bottom: 30px;
-            position: relative;
-        }
+        @media (max-width: 768px) {
+            .countdown-timer {
+                font-size: 1.3em;
+            }
 
-        .swiper-section h3 {
-            text-align: center;
-            color: #d0d0d0;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-        }
-
-        .swiper-container {
-            overflow-x: auto;
-            overflow-y: hidden;
-            scroll-behavior: smooth;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: thin;
-            scrollbar-color: #606060 transparent;
-            padding: 20px 0;
-            margin: 0 -20px;
-            padding-left: 20px;
-        }
-
-        .swiper-container::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        .swiper-container::-webkit-scrollbar-track {
-            background: #2a2a2a;
-            border-radius: 10px;
-        }
-
-        .swiper-container::-webkit-scrollbar-thumb {
-            background: #606060;
-            border-radius: 10px;
-        }
-
-        .swiper-container::-webkit-scrollbar-thumb:hover {
-            background: #707070;
-        }
-
-        .swiper-wrapper {
-            display: flex;
-            gap: 15px;
-            padding: 5px 40px 5px 0;
-        }
-
-        .swiper-slide {
-            flex: 0 0 320px;
-            scroll-snap-align: center;
-            scroll-snap-stop: always;
-        }
-        
-        .swiper-slide:last-child {
-            margin-right: 20px;
-        }
-
-        .swiper-slide .exam-card {
-            height: 100%;
-            margin: 0;
-        }
-
-        .nav-hint {
-            text-align: center;
-            color: #808080;
-            font-size: 0.85em;
-            margin-top: 10px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
+            .countdown h2 {
+                font-size: 1em;
+            }
         }
 
         .mini-calendar {
             background: linear-gradient(145deg, #3a3a3a, #2a2a2a);
             padding: 20px;
             border-radius: 15px;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.1);
             border: 1px solid #505050;
+        }
+
+        @media (max-width: 768px) {
+            .mini-calendar {
+                padding: 15px;
+                margin-bottom: 25px;
+            }
         }
 
         .mini-calendar h3 {
@@ -347,10 +306,6 @@
         @media (max-width: 768px) {
             .calendar-months {
                 grid-template-columns: 1fr;
-            }
-
-            .mini-calendar {
-                padding: 15px;
             }
 
             .mini-calendar h3 {
@@ -431,6 +386,10 @@
                 font-size: 0.75em;
                 margin-top: 8px;
             }
+
+            .swiper-click-area {
+                width: 25%;
+            }
         }
     </style>
 </head>
@@ -441,125 +400,6 @@
         <div class="countdown">
             <h2>İlk Sınava Kalan Süre</h2>
             <div class="countdown-timer" id="countdown"></div>
-        </div>
-
-        <div class="swiper-section">
-            <div class="nav-hint">← Kaydırarak diğer sınavlara bakın →</div>
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
-                    <!-- 30 Aralık 2025 -->
-                    <div class="swiper-slide">
-                        <div class="exam-card" id="swiper-exam-30-ara">
-                            <div class="exam-date">
-                                <div class="date-box">
-                                    <div class="date-day">30</div>
-                                    <div class="date-month">Aralık</div>
-                                </div>
-                                <div class="day-name">Salı</div>
-                            </div>
-                            <div class="exam-time">11:30</div>
-                            <div class="exam-name">İşletim Sistemleri</div>
-                            <div class="exam-location">A201 – A203 – Lab1</div>
-                        </div>
-                    </div>
-
-                    <!-- 31 Aralık 2025 -->
-                    <div class="swiper-slide">
-                        <div class="exam-card" id="swiper-exam-31-ara">
-                            <div class="exam-date">
-                                <div class="date-box">
-                                    <div class="date-day">31</div>
-                                    <div class="date-month">Aralık</div>
-                                </div>
-                                <div class="day-name">Çarşamba</div>
-                            </div>
-                            <div class="exam-time">09:30</div>
-                            <div class="exam-name">Veri Yönetimi ve Dosya Yapıları</div>
-                            <div class="exam-location">A201 – A203</div>
-                        </div>
-                    </div>
-
-                    <!-- 02 Ocak 2026 -->
-                    <div class="swiper-slide">
-                        <div class="exam-card" id="swiper-exam-2-oca">
-                            <div class="exam-date">
-                                <div class="date-box">
-                                    <div class="date-day">02</div>
-                                    <div class="date-month">Ocak</div>
-                                </div>
-                                <div class="day-name">Cuma</div>
-                            </div>
-                            <div class="exam-time">14:00</div>
-                            <div class="exam-name">Mikro Denetleyiciler</div>
-                            <div class="exam-location">A201 – A203</div>
-                        </div>
-                    </div>
-
-                    <!-- 05 Ocak 2026 -->
-                    <div class="swiper-slide">
-                        <div class="exam-card" id="swiper-exam-5-oca">
-                            <div class="exam-date">
-                                <div class="date-box">
-                                    <div class="date-day">05</div>
-                                    <div class="date-month">Ocak</div>
-                                </div>
-                                <div class="day-name">Pazartesi</div>
-                            </div>
-                            <div class="exam-time">14:00</div>
-                            <div class="exam-name">Veri Tabanı Yönetim Sistemleri</div>
-                            <div class="exam-location">A201 – A203 – Lab1</div>
-                        </div>
-                    </div>
-
-                    <!-- 07 Ocak 2026 - İlk Sınav -->
-                    <div class="swiper-slide">
-                        <div class="exam-card" id="swiper-exam-7-oca-linux">
-                            <div class="exam-date">
-                                <div class="date-box">
-                                    <div class="date-day">07</div>
-                                    <div class="date-month">Ocak</div>
-                                </div>
-                                <div class="day-name">Çarşamba</div>
-                            </div>
-                            <div class="exam-time">12:00</div>
-                            <div class="exam-name">Linux ile Sistem Yönetimi</div>
-                            <div class="exam-location">A201 – A203 – Lab1</div>
-                        </div>
-                    </div>
-
-                    <!-- 07 Ocak 2026 - İkinci Sınav -->
-                    <div class="swiper-slide">
-                        <div class="exam-card" id="swiper-exam-7-oca-girisimcilik">
-                            <div class="exam-date">
-                                <div class="date-box">
-                                    <div class="date-day">07</div>
-                                    <div class="date-month">Ocak</div>
-                                </div>
-                                <div class="day-name">Çarşamba</div>
-                            </div>
-                            <div class="exam-time">15:00</div>
-                            <div class="exam-name">Girişimcilik</div>
-                            <div class="exam-location">A201 – A203 – Lab1</div>
-                        </div>
-                    </div>
-
-                    <!-- 09 Ocak 2026 -->
-                    <div class="swiper-slide">
-                        <div class="exam-card" id="swiper-exam-9-oca">
-                            <div class="exam-date">
-                                <div class="date-box">
-                                    <div class="date-day">09</div>
-                                    <div class="date-month">Ocak</div>
-                                </div>
-                                <div class="day-name">Cuma</div>
-                            </div>
-                            <div class="exam-time">10:30</div>
-                            <div class="exam-name">Veri Analizi</div>
-                            <div class="exam-location">A201 – A203 – Lab1</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="mini-calendar">
