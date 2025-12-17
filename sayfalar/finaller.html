@@ -245,6 +245,14 @@
             border: 1px solid #707070;
             box-shadow: 0 0 10px rgba(144,144,144,0.2);
             font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .calendar-day.exam-day:hover {
+            background: linear-gradient(145deg, #5a5a5a, #4a4a4a);
+            box-shadow: 0 0 15px rgba(144,144,144,0.4);
+            transform: scale(1.05);
         }
 
         .calendar-day.empty {
@@ -324,12 +332,12 @@
                         <div class="calendar-day-header">Paz</div>
                         
                         <div class="calendar-day">29 Ara</div>
-                        <div class="calendar-day exam-day" title="İşletim Sistemleri - 11:30">30 Ara<br><span style="font-size:0.7em;">
+                        <div class="calendar-day exam-day" title="İşletim Sistemleri - 11:30" onclick="scrollToExam('exam-30-ara')">30 Ara<br><span style="font-size:0.7em;">
                             İşletim 
                             Sis.</span></div>
-                        <div class="calendar-day exam-day" title="Veri Yönetimi ve Dosya Yapıları - 09:30">31 Ara<br><span style="font-size:0.7em;">VYDY</span></div>
+                        <div class="calendar-day exam-day" title="Veri Yönetimi ve Dosya Yapıları - 09:30" onclick="scrollToExam('exam-31-ara')">31 Ara<br><span style="font-size:0.7em;">VYDY</span></div>
                         <div class="calendar-day">1 Oca</div>
-                        <div class="calendar-day exam-day" title="Mikro Denetleyiciler - 14:00">2 Oca<br><span style="font-size:0.7em;">Mikro</span></div>
+                        <div class="calendar-day exam-day" title="Mikro Denetleyiciler - 14:00" onclick="scrollToExam('exam-2-oca')">2 Oca<br><span style="font-size:0.7em;">Mikro</span></div>
                         <div class="calendar-day">3 Oca</div>
                         <div class="calendar-day">4 Oca</div>
                     </div>
@@ -347,13 +355,13 @@
                         <div class="calendar-day-header">Cmt</div>
                         <div class="calendar-day-header">Paz</div>
                         
-                        <div class="calendar-day exam-day" title="Veri Tabanı Yönetim Sistemleri - 14:00">5 Oca<br><span style="font-size:0.7em;">VTYS</span></div>
+                        <div class="calendar-day exam-day" title="Veri Tabanı Yönetim Sistemleri - 14:00" onclick="scrollToExam('exam-5-oca')">5 Oca<br><span style="font-size:0.7em;">VTYS</span></div>
                         <div class="calendar-day">6 Oca</div>
-                        <div class="calendar-day exam-day" title="Linux ile Sistem Yönetimi (12:00) + Girişimcilik (15:00)">7 Oca<br><span style="font-size:0.7em;">
+                        <div class="calendar-day exam-day" title="Linux ile Sistem Yönetimi (12:00) + Girişimcilik (15:00)" onclick="scrollToExam('exam-7-oca-linux')">7 Oca<br><span style="font-size:0.7em;">
                             Linux+
                             Gir .</span></div>
                         <div class="calendar-day">8 Oca</div>
-                        <div class="calendar-day exam-day" title="Veri Analizi - 10:30">9 Oca<br><span style="font-size:0.7em;">Veri Anal.</span></div>
+                        <div class="calendar-day exam-day" title="Veri Analizi - 10:30" onclick="scrollToExam('exam-9-oca')">9 Oca<br><span style="font-size:0.7em;">Veri Anal.</span></div>
                         <div class="calendar-day">10 Oca</div>
                         <div class="calendar-day">11 Oca</div>
                     </div>
@@ -363,7 +371,7 @@
 
         <div class="calendar">
             <!-- 30 Aralık 2025 -->
-            <div class="exam-card">
+            <div class="exam-card" id="exam-30-ara">
                 <div class="exam-date">
                     <div class="date-box">
                         <div class="date-day">30</div>
@@ -377,7 +385,7 @@
             </div>
 
             <!-- 31 Aralık 2025 -->
-            <div class="exam-card">
+            <div class="exam-card" id="exam-31-ara">
                 <div class="exam-date">
                     <div class="date-box">
                         <div class="date-day">31</div>
@@ -391,7 +399,7 @@
             </div>
 
             <!-- 02 Ocak 2026 -->
-            <div class="exam-card">
+            <div class="exam-card" id="exam-2-oca">
                 <div class="exam-date">
                     <div class="date-box">
                         <div class="date-day">02</div>
@@ -405,7 +413,7 @@
             </div>
 
             <!-- 05 Ocak 2026 -->
-            <div class="exam-card">
+            <div class="exam-card" id="exam-5-oca">
                 <div class="exam-date">
                     <div class="date-box">
                         <div class="date-day">05</div>
@@ -419,7 +427,7 @@
             </div>
 
             <!-- 07 Ocak 2026 - İlk Sınav -->
-            <div class="exam-card">
+            <div class="exam-card" id="exam-7-oca-linux">
                 <div class="exam-date">
                     <div class="date-box">
                         <div class="date-day">07</div>
@@ -433,7 +441,7 @@
             </div>
 
             <!-- 07 Ocak 2026 - İkinci Sınav -->
-            <div class="exam-card">
+            <div class="exam-card" id="exam-7-oca-girisimcilik">
                 <div class="exam-date">
                     <div class="date-box">
                         <div class="date-day">07</div>
@@ -447,7 +455,7 @@
             </div>
 
             <!-- 09 Ocak 2026 -->
-            <div class="exam-card">
+            <div class="exam-card" id="exam-9-oca">
                 <div class="exam-date">
                     <div class="date-box">
                         <div class="date-day">09</div>
@@ -463,6 +471,21 @@
     </div>
 
     <script>
+        // Sınav kartına scroll yapma
+        function scrollToExam(examId) {
+            const element = document.getElementById(examId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                // Kısa animasyon efekti
+                element.style.transform = 'scale(1.05)';
+                element.style.boxShadow = '0 20px 50px rgba(144,144,144,0.5), inset 0 1px 0 rgba(255,255,255,0.2)';
+                setTimeout(() => {
+                    element.style.transform = '';
+                    element.style.boxShadow = '';
+                }, 600);
+            }
+        }
+
         // Geri sayım sayacı
         function updateCountdown() {
             const firstExam = new Date('2025-12-30T11:30:00');
