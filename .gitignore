@@ -18,7 +18,6 @@ yarn-debug.log*
 yarn-error.log*
 
 # User specific instruction files (like the one used for the prompt)
-button.md
 *.md
 
 # Since this is a simple static site without node_modules currently, 

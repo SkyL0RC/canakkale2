@@ -341,7 +341,7 @@
     const btnYeni = document.getElementById("btn-yeni-sekme");
 
 
-    /* ---- PDF göster ---- */
+    /* ---- PDF göster (anında, gecikme yok) ---- */
     function setActivePdf(url, searchTerm) {
       activePdfUrl = url;
 
@@ -355,31 +355,31 @@
         return;
       }
 
-      // Dosya seçildiğinde linkleri güncelle
-      btnIndir.href = url;
-      btnIndir.classList.remove("disabled");
-      btnYeni.href = url;
-      btnYeni.classList.remove("disabled");
-
-      // Eğer mobil cihazsa, tıkladığında direkt yeni sekmede açsın ve iframe kısmını gizli/boş göstersin.
-      if (window.innerWidth <= 600) {
-        window.open(url, '_blank');
-        iframe.style.display = "none";
-        placeholder.style.display = "flex";
-        placeholder.innerHTML = "PDF yeni sekmede açıldı.<br>Tekrar açmak için butona tıklayın veya listeden başka PDF seçin.";
-        return;
-      }
-
-      // Masaüstü için iframe gösterimi
+      // Doğrudan PDF URL — tarayıcı PDF görüntüleyici çok daha hızlı
       const hash = searchTerm
         ? "#search=" + encodeURIComponent(searchTerm)
         : "";
 
-      if (iframe.src !== url + hash) {
-        iframe.src = url + hash;
+      let finalUrl = url + hash;
+
+      // Mobil cihazlarda bazı tarayıcılar (Safari, Chrome Mobile) PDF'leri iframe içinde
+      // göstermekte zorlanabilir, indirmeye zorlayabilir veya boş kutu çıkarabilir.
+      // Ebat küçükse (telefon), güvenilir iframe gösterimi için Google Docs Viewer aracı kullanılır.
+      if (window.innerWidth <= 768) {
+        finalUrl = "https://docs.google.com/viewer?url=" + encodeURIComponent(url) + "&embedded=true";
+      }
+
+      // src değişikliği garantili yeniden yükleme için
+      if (iframe.src !== finalUrl) {
+        iframe.src = finalUrl;
       }
       iframe.style.display = "block";
       placeholder.style.display = "none";
+
+      btnIndir.href = url;
+      btnIndir.classList.remove("disabled");
+      btnYeni.href = url;
+      btnYeni.classList.remove("disabled");
     }
 
     /* ---- PDF listesi render ---- */

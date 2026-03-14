@@ -43,15 +43,12 @@ body {
   display: block;
   /* Linkleri alt alta dizmek için block olarak ayarlar */
   text-align: center;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.2s;
   /* Arka plan rengi ve transform animasyonu */
-  transform: scale(0.9);
 }
 
 .link-container:hover {
-  transform: scale(1.08);
   background-color: rgba(255, 0, 0, 0.7);
-  transition: transform 0.2s, background-color 0.2s;
 }
 
 @keyframes wiggle {
@@ -95,6 +92,6 @@ body {
       0,
       0.7);
   /* Tıklama sırasında arka plan rengini değiştirir */
-  transform: scale(0.98);
+  transform: scale(0.95);
   /* Tıklama sırasında biraz küçülür */
 }
