@@ -341,7 +341,7 @@
     const btnYeni = document.getElementById("btn-yeni-sekme");
 
 
-    /* ---- PDF göster (anında, gecikme yok) ---- */
+    /* ---- PDF göster ---- */
     function setActivePdf(url, searchTerm) {
       activePdfUrl = url;
 
@@ -355,23 +355,31 @@
         return;
       }
 
-      // Doğrudan PDF URL — tarayıcı PDF görüntüleyici çok daha hızlı
-      // #search= ile ChromeEdge yerleşik PDF aramasını tetikler
+      // Dosya seçildiğinde linkleri güncelle
+      btnIndir.href = url;
+      btnIndir.classList.remove("disabled");
+      btnYeni.href = url;
+      btnYeni.classList.remove("disabled");
+
+      // Eğer mobil cihazsa, tıkladığında direkt yeni sekmede açsın ve iframe kısmını gizli/boş göstersin.
+      if (window.innerWidth <= 600) {
+        window.open(url, '_blank');
+        iframe.style.display = "none";
+        placeholder.style.display = "flex";
+        placeholder.innerHTML = "PDF yeni sekmede açıldı.<br>Tekrar açmak için butona tıklayın veya listeden başka PDF seçin.";
+        return;
+      }
+
+      // Masaüstü için iframe gösterimi
       const hash = searchTerm
         ? "#search=" + encodeURIComponent(searchTerm)
         : "";
 
-      // src değişikliği garantili yeniden yükleme için
       if (iframe.src !== url + hash) {
         iframe.src = url + hash;
       }
       iframe.style.display = "block";
       placeholder.style.display = "none";
-
-      btnIndir.href = url;
-      btnIndir.classList.remove("disabled");
-      btnYeni.href = url;
-      btnYeni.classList.remove("disabled");
     }
 
     /* ---- PDF listesi render ---- */
