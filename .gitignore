@@ -1,0 +1,31 @@
+# macOS specific
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# User specific instruction files (like the one used for the prompt)
+button.md
+*.md
+
+# Since this is a simple static site without node_modules currently, 
+# you don't typically need node_modules here, but good practice
+node_modules/
+.npm/
+
+# Temporaries
+tmp/
+temp/

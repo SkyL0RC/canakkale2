@@ -1,90 +1,481 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../style.css">
-    <title>Çanakkale</title>
+<html lang="tr">
 
-    
-    <!-- Diğer stil ve script bağlantıları -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Otobüs Saatleri — Çanakkale</title>
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    /* background-img'i fixed yap: sayfanın tamamını kaplar, scroll'da kaybolmaz */
+    .background-img {
+      position: fixed !important;
+    }
+  </style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <style>
+    /* Global style.css'i bu sayfaya özgü sıfırla */
+    html {
+      height: auto;
+      min-height: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
 
-    
-  </head>
-  <body>
-    <img src="../resimler/skule.png" alt="Çanakkale" class="background-img" loading="eager"/>
+    body {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      height: auto !important;
+      min-height: 100vh;
+      padding: 24px 16px 32px;
+      box-sizing: border-box;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
 
-    <div class="content">
-      <div class="background-box">
-        <a
-          href="https://ulasim.canakkale.bel.tr/wp-content/uploads/2018/02/3-ARALIK-5.pdf"
-        >
-          <div class="link-container">Hafta İçi</div>
-        </a>
+    /* Geri butonu */
+    .geri-btn {
+      align-self: flex-start;
+      background: rgba(45, 45, 45, 0.85);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 8px 22px;
+      font-size: 15px;
+      cursor: pointer;
+      text-decoration: none;
+      margin-bottom: 18px;
+      transition: background 0.2s;
+    }
 
-        <a
-          href="https://ulasim.canakkale.bel.tr/wp-content/uploads/2018/02/6-ARALIK.pdf"
-        >
-          <div class="link-container">Hafta Sonu</div>
-        </a>
+    .geri-btn:hover {
+      background: rgba(90, 90, 90, 0.9);
+      color: #fff;
+    }
 
-        <a
-          href="https://ulasim.canakkale.bel.tr/rehber/hatlar-otobus-saatleri/"
-        >
-          <div class="link-container">Belediyenin Sitesi</div>
-        </a>
+    /* Ana kart */
+    .otobus-card {
+      width: 100%;
+      max-width: 860px;
+      background: rgba(22, 22, 22, 0.88);
+      border-radius: 18px;
+      padding: 28px 28px 24px;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.55);
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
 
-        
-        
+    /* Mobil düzenlemeler */
+    @media (max-width: 600px) {
+      body {
+        padding: 16px 10px 24px;
+      }
+
+      .otobus-card {
+        padding: 18px 14px 18px;
+        border-radius: 14px;
+      }
+
+      .otobus-card h1 {
+        font-size: 18px;
+        margin-bottom: 14px;
+      }
+
+      .tab-btn {
+        font-size: 13px;
+        padding: 8px 10px;
+        min-width: 0;
+      }
+
+      #pdf-iframe {
+        height: 70vh !important;
+        min-height: 320px !important;
+      }
+
+      .iframe-placeholder {
+        height: 70vh !important;
+        min-height: 320px !important;
+      }
+
+      .pdf-item {
+        font-size: 13px;
+        padding: 9px 12px;
+      }
+
+      .action-btn {
+        font-size: 13px;
+        padding: 9px 14px;
+      }
+
+      .geri-btn {
+        font-size: 14px;
+        padding: 7px 16px;
+      }
+    }
+
+    .otobus-card h1 {
+      color: #fff;
+      font-size: 22px;
+      font-weight: 600;
+      margin: 0 0 20px;
+      letter-spacing: 0.04em;
+      text-align: center;
+    }
+
+    /* Tab butonları */
+    .tab-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .tab-btn {
+      flex: 1 1 auto;
+      min-width: 110px;
+      background: rgba(60, 60, 60, 0.75);
+      color: #ccc;
+      border: 1.5px solid transparent;
+      border-radius: 10px;
+      padding: 9px 14px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+      text-align: center;
+    }
+
+    .tab-btn:hover {
+      background: rgba(90, 90, 90, 0.85);
+      color: #fff;
+    }
+
+    .tab-btn.active {
+      background: rgba(180, 30, 30, 0.82);
+      color: #fff;
+      border-color: rgba(220, 60, 60, 0.7);
+    }
+
+    /* PDF listesi */
+    .pdf-list {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-bottom: 14px;
+      min-height: 36px;
+    }
+
+    .pdf-item {
+      background: rgba(50, 50, 50, 0.75);
+      border: 1.5px solid transparent;
+      border-radius: 10px;
+      padding: 10px 16px;
+      color: #ddd;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      user-select: none;
+    }
+
+    .pdf-item:hover {
+      background: rgba(80, 80, 80, 0.85);
+      color: #fff;
+    }
+
+    .pdf-item.active {
+      background: rgba(180, 30, 30, 0.75);
+      border-color: rgba(220, 60, 60, 0.6);
+      color: #fff;
+    }
+
+    .bos-mesaj {
+      color: #888;
+      font-size: 14px;
+      text-align: center;
+      padding: 14px 0;
+    }
 
 
-      </div>
+
+    /* iframe */
+    .pdf-viewer-wrap {
+      position: relative;
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #111;
+      margin-bottom: 16px;
+    }
+
+    #pdf-iframe {
+      width: 100%;
+      height: 85vh;
+      min-height: 620px;
+      border: none;
+      display: block;
+    }
+
+    .iframe-placeholder {
+      width: 100%;
+      height: 85vh;
+      min-height: 620px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      font-size: 14px;
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* Alt butonlar */
+    .action-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .action-btn {
+      flex: 1 1 auto;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.12s;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      line-height: 1.4;
+    }
+
+    .action-btn.disabled {
+      opacity: 0.32;
+      pointer-events: none;
+    }
+
+    .action-btn:hover:not(.disabled) {
+      opacity: 0.85;
+      transform: translateY(-1px);
+    }
+
+    #btn-indir {
+      background: rgba(180, 30, 30, 0.85);
+      color: #fff;
+    }
+
+    #btn-yeni-sekme {
+      background: rgba(60, 60, 60, 0.85);
+      color: #ddd;
+      border: 1.5px solid rgba(100, 100, 100, 0.5);
+    }
+
+    #btn-belediye {
+      background: rgba(30, 100, 180, 0.85);
+      color: #fff;
+      border: 1.5px solid rgba(50, 120, 200, 0.5);
+    }
+  </style>
+</head>
+
+<body>
+  <img src="../resimler/skule.png" alt="Çanakkale" class="background-img" loading="eager" />
+  <a href="canakkale.html" class="geri-btn">← Geri</a>
+  <div class="otobus-card">
+    <h1>Otobüs Saatleri</h1>
+
+    <!-- Tab butonları (JS ile dinamik doldurulacak) -->
+    <div class="tab-bar" id="tab-bar"></div>
+
+    <!-- PDF listesi -->
+    <div class="pdf-list" id="pdf-list">
+      <div class="bos-mesaj">Yükleniyor...</div>
     </div>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const linkContainers = document.querySelectorAll(".link-container");
 
-        linkContainers.forEach((container) => {
-          container.addEventListener("click", function (event) {
-            // Bağlantıyı hedefleyen a etiketini bul
-            const link = this.parentNode;
 
-            // Yönlendirmeyi durdur
-            event.preventDefault();
+    <!-- PDF görüntüleyici -->
+    <div class="pdf-viewer-wrap">
+      <div class="iframe-placeholder" id="iframe-placeholder">
+        Görüntülemek için yukarıdan bir PDF seçin.
+      </div>
+      <iframe id="pdf-iframe" title="PDF Görüntüleyici" style="display:none;"></iframe>
+    </div>
 
-            // Animasyon sınıfını ekle
-            this.classList.add("animate");
+    <!-- Alt butonlar -->
+    <div class="action-bar">
+      <a id="btn-indir" class="action-btn disabled" href="#" download>PDF İndir</a>
+      <a id="btn-yeni-sekme" class="action-btn disabled" href="#" target="_blank" rel="noopener noreferrer">Yeni Sekmede
+        Aç</a>
+      <a id="btn-belediye" class="action-btn" href="https://ulasim.canakkale.bel.tr/rehber/hatlar-otobus-saatleri/"
+        target="_blank" rel="noopener noreferrer">Belediye Sitesine Git</a>
+    </div>
+  </div>
 
-            // 0.3 saniye sonra yönlendirme yap
-            setTimeout(() => {
-              this.classList.remove("animate");
-              window.location.href = link.href; // Bağlantıya yönlendir
-            }, 300); // 300 ms, animasyon süresi ile aynı olmalı
-          });
+  <script>
+    const DATA_URL = "../data/links.json";
+
+    let activeCat = null;
+    let activePdfUrl = null;
+
+    const LABELS = {
+      haftaici: "Hafta İçi",
+      haftasonu: "Hafta Sonu",
+      arefe: "Arefe",
+      bayram: "Bayram",
+      diger: "Diğer",
+    };
+
+    const tabBar = document.getElementById("tab-bar");
+    const pdfList = document.getElementById("pdf-list");
+    const iframe = document.getElementById("pdf-iframe");
+    const placeholder = document.getElementById("iframe-placeholder");
+    const btnIndir = document.getElementById("btn-indir");
+    const btnYeni = document.getElementById("btn-yeni-sekme");
+
+
+    /* ---- PDF göster (anında, gecikme yok) ---- */
+    function setActivePdf(url, searchTerm) {
+      activePdfUrl = url;
+
+      if (!url) {
+        iframe.style.display = "none";
+        placeholder.style.display = "flex";
+        btnIndir.classList.add("disabled");
+        btnIndir.removeAttribute("href");
+        btnYeni.classList.add("disabled");
+        btnYeni.removeAttribute("href");
+        return;
+      }
+
+      // Doğrudan PDF URL — tarayıcı PDF görüntüleyici çok daha hızlı
+      // #search= ile ChromeEdge yerleşik PDF aramasını tetikler
+      const hash = searchTerm
+        ? "#search=" + encodeURIComponent(searchTerm)
+        : "";
+
+      // src değişikliği garantili yeniden yükleme için
+      if (iframe.src !== url + hash) {
+        iframe.src = url + hash;
+      }
+      iframe.style.display = "block";
+      placeholder.style.display = "none";
+
+      btnIndir.href = url;
+      btnIndir.classList.remove("disabled");
+      btnYeni.href = url;
+      btnYeni.classList.remove("disabled");
+    }
+
+    /* ---- PDF listesi render ---- */
+    function renderList(cat, autoSelect) {
+      const items = linksData[cat] || [];
+
+      if (items.length === 0) {
+        pdfList.innerHTML = '<div class="bos-mesaj">Bu kategori için PDF bulunamadı.</div>';
+        setActivePdf(null);
+        return;
+      }
+
+      pdfList.innerHTML = "";
+      items.forEach(function (item, idx) {
+        const div = document.createElement("div");
+        div.className = "pdf-item";
+        div.textContent = item.label || item.url.split("/").pop();
+        div.title = item.url;
+        div.dataset.url = item.url;
+
+        div.addEventListener("click", function () {
+          pdfList.querySelectorAll(".pdf-item").forEach(d => d.classList.remove("active"));
+          div.classList.add("active");
+          setActivePdf(item.url);
         });
-      });
-    </script>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-      integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+        pdfList.appendChild(div);
+
+        // İlk öğeyi otomatik seç
+        if (idx === 0 && autoSelect !== false) {
+          div.classList.add("active");
+          setActivePdf(item.url);
+        }
+      });
+    }
+
+    /* ---- Render Tabs ---- */
+    function renderTabs() {
+      tabBar.innerHTML = "";
+      const availableCats = [];
+
+      // Hangi kategorilerde veri var bul
+      for (const cat in LABELS) {
+        if (linksData[cat] && linksData[cat].length > 0) {
+          availableCats.push({ cat: cat, label: LABELS[cat] });
+        }
+      }
+
+      if (availableCats.length === 0) {
+        tabBar.style.display = "none";
+        pdfList.innerHTML = '<div class="bos-mesaj">Şu an hiç otobüs saati dosyası bulunmuyor.</div>';
+        setActivePdf(null);
+        return;
+      }
+
+      tabBar.style.display = "flex";
+
+      // Tab butonlarını oluştur
+      availableCats.forEach((item, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "tab-btn";
+        btn.dataset.cat = item.cat;
+        btn.textContent = item.label;
+        tabBar.appendChild(btn);
+      });
+
+      // İlk kullanılabilir kategoriyi aktif yap
+      const firstCat = availableCats[0].cat;
+      activeCat = firstCat;
+      tabBar.querySelector(`[data-cat="${firstCat}"]`).classList.add("active");
+      renderList(firstCat);
+    }
+
+    /* ---- Tab değişimi ---- */
+    tabBar.addEventListener("click", function (e) {
+      const btn = e.target.closest(".tab-btn");
+      if (!btn) return;
+      tabBar.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      activeCat = btn.dataset.cat;
+      renderList(activeCat);
+    });
+
+
+    /* ---- Veriyi yükle ---- */
+    async function loadData() {
+      try {
+        const res = await fetch(DATA_URL);
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        linksData = await res.json();
+      } catch (e) {
+        pdfList.innerHTML = '<div class="bos-mesaj">Veriler yüklenemedi. Lütfen daha sonra tekrar deneyin.</div>';
+        console.error("links.json yüklenemedi:", e);
+        return;
+      }
+      renderTabs();
+    }
+
+    loadData();
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>

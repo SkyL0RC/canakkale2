@@ -1,0 +1,43 @@
+name: Otobüs Saatleri PDF Scraper
+
+on:
+  schedule:
+    # Her gün 03:00 UTC = 06:00 TR (UTC+3)
+    - cron: "0 3 * * *"
+  workflow_dispatch: # Elle de tetiklenebilir
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout reposu al
+        uses: actions/checkout@v4
+
+      - name: Python kur
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Bağımlılıkları kur
+        run: pip install requests beautifulsoup4
+
+      - name: Scraper'ı çalıştır
+        run: python scraper.py
+
+      - name: Değişiklik var mı kontrol et
+        id: check
+        run: |
+          git diff --quiet data/links.json || echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Değişiklikleri commit ve push yap
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/links.json
+          git commit -m "chore: otobüs PDF linkleri güncellendi [$(date -u +'%Y-%m-%d')]"
+          git push
