@@ -9,16 +9,15 @@
       "url": "https://ulasim.canakkale.bel.tr/wp-content/uploads/2018/02/23-MART-3.pdf"
     }
   ],
-  "haftasonu": [
-    {
-      "label": "HAFTA SONU SEFER SAATLERİ",
-      "url": "https://ulasim.canakkale.bel.tr/wp-content/uploads/2018/02/7-MART-4.pdf"
-    }
-  ],
+  "haftasonu": [],
   "arefe": [
     {
+      "label": "AREFE GÜNÜ KABRİSTAN SEFERLERİ",
+      "url": "https://ulasim.canakkale.bel.tr/wp-content/uploads/2018/02/AREFE-SEFERLERI.pdf"
+    },
+    {
       "label": "AREFE GÜNÜ SEFER SAATLERİ",
-      "url": "https://ulasim.canakkale.bel.tr/wp-content/uploads/2018/02/19-MART-AREFE-1.pdf"
+      "url": "https://ulasim.canakkale.bel.tr/wp-content/uploads/2018/02/19-MART-AREFE-3.pdf"
     }
   ],
   "bayram": [
